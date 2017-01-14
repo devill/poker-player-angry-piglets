@@ -3,7 +3,6 @@ class Player:
     VERSION = "Default Python folding player"
 
     def betRequest(self, game_state):
-        return 10000
         try:
             self.player = self.get_our_player(game_state)
             self.hole_cards = self.get_our_hand()
@@ -23,7 +22,14 @@ class Player:
         0/0
 
     def get_our_hand(self):
-        return self.player["hole_cards"]
+        self.hole_cards = self.player["hole_cards"]
+        self.hole_cards_ranks = None
 
     def have_pair(self):
         return self.hole_cards[0]["rank"] == self.hole_cards[1]["rank"]
+
+    def is_suited(self):
+        return self.hole_cards[0]["suit"] == self.hole_cards[1]["suit"]
+
+    def have_ace(self):
+        return self.hole_cards[0]["suit"] == "A" or self.hole_cards[1]["suit"] == "A"
