@@ -17,7 +17,7 @@ class Player:
     def betRequest(self, game_state):
         try:
             log.info('config: %s', self.config)
-            log.info('config key: %s', self.config.key)
+            log.info('config class: %s', self.config.lofasz)
             self.player = self.get_our_player(game_state)
             self.get_our_hand()
             chen_score = self.chen_formula()
