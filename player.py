@@ -1,15 +1,15 @@
 import traceback
 
-import ssl
-from pymongo import MongoClient
+# import ssl
+# from pymongo import MongoClient
 
 class Player:
     VERSION = "Default Python folding player"
 
-    def mongo_test(self):
-        client = MongoClient('mongodb://web:almafa@aws-us-east-1-portal.22.dblayer.com:16806,aws-us-east-1-portal.23.dblayer.com:16806/admin?ssl=true',ssl_cert_reqs=ssl.CERT_NONE)
-
-        return client.config.config.find_one({})['key']
+    # def mongo_test(self):
+    #     client = MongoClient('mongodb://web:almafa@aws-us-east-1-portal.22.dblayer.com:16806,aws-us-east-1-portal.23.dblayer.com:16806/admin?ssl=true',ssl_cert_reqs=ssl.CERT_NONE)
+    #
+    #     return client.config.config.find_one({})['key']
 
     def betRequest(self, game_state):
         try:
@@ -22,11 +22,10 @@ class Player:
             if chen_score >= chen_score_treshold:
                 return 10000
             else:
-                if False:
-                    if self.get_position(game_state) == 2 and self.no_raise(game_state):
-                        return game_state["current_buy_in"] - game_state["players"]["in_action"]["bet"] + game_state["minimum_raise"]
-                    if self.get_position(game_state) == 1 and self.no_raise(game_state):
-                        return game_state["current_buy_in"] - game_state["players"]["in_action"]["bet"] + game_state["minimum_raise"]
+                if self.get_position(game_state) == 2 and self.no_raise(game_state):
+                    return game_state["current_buy_in"] - self.player["bet"] + game_state["minimum_raise"]
+                if self.get_position(game_state) == 1 and self.no_raise(game_state):
+                    return game_state["current_buy_in"] - self.player["bet"] + game_state["minimum_raise"]
                 return 0
         except:
             traceback.print_exc()
