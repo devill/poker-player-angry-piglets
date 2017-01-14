@@ -15,6 +15,8 @@ class Config(object):
     refresh_interval = 5
     heads_up_threshold = 7
     default_threshold = 10
+    aggression_index = 7
+    safety_index = 4
 
     def __init__(self):
         self.log = player.log

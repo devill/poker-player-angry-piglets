@@ -38,9 +38,9 @@ class Player:
                         return game_state["current_buy_in"] - self.player["bet"] + game_state["minimum_raise"]
                     else:
                         return game_state["small_blind"] * 2
-                if self.min_raise_happened(game_state) and chen_score > 7:
+                if self.min_raise_happened(game_state) and chen_score > int(self.config.aggression_index):
                     return game_state["current_buy_in"] - self.player["bet"] + (game_state["minimum_raise"] * 2)
-                if game_state["current_buy_in"] <= self.player["bet"] * 2 and chen_score > 4:
+                if game_state["current_buy_in"] <= self.player["bet"] * 2 and chen_score > int(self.config.safety_index):
                     return game_state["current_buy_in"]
                 return 0
         except:
