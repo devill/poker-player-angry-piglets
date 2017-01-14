@@ -7,7 +7,7 @@ class Player:
     def betRequest(self, game_state):
         try:
             self.player = self.get_our_player(game_state)
-            self.hole_cards = self.get_our_hand()
+            self.get_our_hand()
             if self.have_pair():
                 return 10000
             return 0
