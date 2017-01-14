@@ -42,8 +42,6 @@ class PlayerService(BaseHTTPServer.BaseHTTPRequestHandler):
             Player().showdown(game_state)
         elif action == 'version':
             response = Player.VERSION
-        elif action == 'mongotest':
-            response = Player().mongo_test()
 
         self.wfile.write(response)
 
