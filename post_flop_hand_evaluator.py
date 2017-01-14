@@ -28,6 +28,15 @@ class PostFlopHandEvaluator:
 
         return False
 
+    def has_four_of_a_kind(self):
+        if self.nof_same_rank_community_card_as_hole_card(0) >= 3 or self.nof_same_rank_community_card_as_hole_card(1) >= 3:
+            return True
+
+        if self.has_pair_in_hand():
+            return self.nof_same_rank_community_card_as_hole_card(0) >= 2
+
+        return False
+
     def has_pair_in_hand(self):
         return self.hole_cards[0]['rank'] ==  self.hole_cards[1]['rank']
 
