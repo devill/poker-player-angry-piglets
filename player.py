@@ -1,7 +1,12 @@
+import logging
+from pymongo import MongoClient
+import ssl
+import sys
 import traceback
 
 # import ssl
 # from pymongo import MongoClient
+
 
 class Player:
     VERSION = "Default Python folding player"
@@ -13,6 +18,7 @@ class Player:
 
     def betRequest(self, game_state):
         try:
+            log.info('Juci debug')
             self.player = self.get_our_player(game_state)
             self.get_our_hand()
             chen_score = self.chen_formula()
