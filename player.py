@@ -1,3 +1,5 @@
+import traceback
+
 
 class Player:
     VERSION = "Default Python folding player"
@@ -10,6 +12,7 @@ class Player:
                 return 10000
             return 0
         except:
+            traceback.print_exc()
             return 10000
 
     def showdown(self, game_state):
@@ -23,7 +26,8 @@ class Player:
 
     def get_our_hand(self):
         self.hole_cards = self.player["hole_cards"]
-        self.hole_cards_ranks = None
+        self.hole_cards_ranks = "".join([card["rank"] for card in self.hole_cards])
+        self.hole_cards_ranks = "".join([card["suit"][0] for card in self.hole_cards])
 
     def have_pair(self):
         return self.hole_cards[0]["rank"] == self.hole_cards[1]["rank"]
