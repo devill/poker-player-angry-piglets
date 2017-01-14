@@ -1,8 +1,15 @@
 import traceback
 
+import ssl
+from pymongo import MongoClient
 
 class Player:
     VERSION = "Default Python folding player"
+
+    def mongo_test(self):
+        client = MongoClient('mongodb://web:almafa@aws-us-east-1-portal.22.dblayer.com:16806,aws-us-east-1-portal.23.dblayer.com:16806/admin?ssl=true',ssl_cert_reqs=ssl.CERT_NONE)
+
+        return client.config.config.find_one({})['key']
 
     def betRequest(self, game_state):
         try:
