@@ -9,10 +9,12 @@ log.setLevel(logging.DEBUG)
 
 
 class Player:
+    VERSION_FORMAT = "AngryPiglet [config: {config}]"
     VERSION = "Default Python folding player"
 
     def __init__(self):
         self.config = Config.get_instance()
+        self.VERSION = self.VERSION_FORMAT.format(config=self.config.version)
 
     def betRequest(self, game_state):
         try:
