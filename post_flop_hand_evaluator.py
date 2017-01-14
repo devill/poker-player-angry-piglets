@@ -4,6 +4,27 @@ class PostFlopHandEvaluator:
         self.community_cards = community_cards
         self.hole_cards = hole_cards
 
+    def has_flush(self):
+        return self.has_flush_with_one_card_in_hand() or self.has_flush_with_two_cards_in_hand()
+
+    def has_flush_with_one_card_in_hand(self):
+        return self.nof_same_suit_community_cards_as_hole_card(0) > 3 or self.nof_same_suit_community_cards_as_hole_card(1) > 3
+
+    def has_flush_with_two_cards_in_hand(self):
+        if self.hole_cards[0]['suit'] !=  self.hole_cards[1]['suit']:
+            return False
+
+        return self.nof_same_suit_community_cards_as_hole_card(0) == 2
+
+    def nof_same_suit_community_cards_as_hole_card(self, index):
+        count = 0
+        for card in self.community_cards:
+            if card['suit'] == self.hole_cards[index]['suit']:
+                count +=1
+
+        return count
+
+
     def has_three_of_a_kind_with_two_cards_in_hand(self):
         if not self.has_pair_in_hand():
             return False
