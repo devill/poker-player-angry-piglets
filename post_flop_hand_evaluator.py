@@ -22,6 +22,11 @@ class PostFlopHandEvaluator:
 
         return False
 
+    def has_two_pairs_with_one_card_from_both_in_hand(self):
+        if self.nof_same_rank_community_card_as_hole_card(0) > 0 and self.nof_same_rank_community_card_as_hole_card(1) > 0:
+            return True
+
+        return False
 
     def has_pair_in_hand(self):
         return self.hole_cards[0]['rank'] ==  self.hole_cards[1]['rank']
