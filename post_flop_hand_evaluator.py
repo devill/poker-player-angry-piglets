@@ -13,6 +13,16 @@ class PostFlopHandEvaluator:
 
         return False
 
+    def has_three_of_a_kind_with_one_card_in_hand(self):
+        if self.nof_same_rank_community_card_as_hole_card(0) > 1:
+            return True
+
+        if self.nof_same_rank_community_card_as_hole_card(2) > 1:
+            return True
+
+        return False
+
+
     def has_pair_in_hand(self):
         return self.hole_cards[0]['rank'] ==  self.hole_cards[1]['rank']
 
