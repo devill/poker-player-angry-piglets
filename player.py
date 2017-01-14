@@ -15,7 +15,9 @@ class Player:
             if chen_score >= chen_score_treshold:
                 return 10000
             else:
-                if self.is_big_blind(game_state) and self.no_raise(game_state):
+                if self.get_position(game_state) == 2 and self.no_raise(game_state):
+                    return game_state["current_buy_in"] - game_state["players"]["in_action"]["bet"] + game_state["minimum_raise"]
+                if self.get_position(game_state) == 1 and self.no_raise(game_state):
                     return game_state["current_buy_in"] - game_state["players"]["in_action"]["bet"] + game_state["minimum_raise"]
                 return 0
         except:
@@ -97,3 +99,13 @@ class Player:
 
     def no_raise(self, game_state):
         return game_state["small_blind"] * 2 == game_state["current_buy_in"]
+
+    def get_position(self, game_state):
+        if (game_state["dealer"])%(len(game_state["players"])) == game_state["in_action"]:
+            return 0
+        if (game_state["dealer"]+1)%(len(game_state["players"])) == game_state["in_action"]:
+            return 1
+        if (game_state["dealer"]+2)%(len(game_state["players"])) == game_state["in_action"]:
+            return 2
+        else:
+            return 9
