@@ -8,7 +8,7 @@ class PostFlopHandEvaluator:
         if not self.has_pair_in_hand():
             return False
 
-        if self.three_of_a_kind_with_card_in_hand():
+        if self.n_of_a_kind_with_card_in_hand(0) > 0:
             return True
 
         return False
@@ -16,6 +16,13 @@ class PostFlopHandEvaluator:
     def has_pair_in_hand(self):
         return self.hole_cards[0]['rank'] ==  self.hole_cards[1]['rank']
 
-    def three_of_a_kind_with_card_in_hand(self):
-        pass # TODO
+    def n_of_a_kind_with_card_in_hand(self, index):
+        count = 0
+        for card in self.community_cards:
+            if card['rank'] == self.hole_cards[index]['rank']:
+                count +=1
+
+        return count
+
+
 
