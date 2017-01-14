@@ -71,8 +71,4 @@ curl -d 'action=bet_request&game_state={
 
 echo ""
 
-# curl -d 'action=mongotest' http://localhost:9000
-#
-# echo ""
-
 kill -15 $PID

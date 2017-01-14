@@ -4,9 +4,6 @@ import ssl
 import sys
 import traceback
 
-# import ssl
-# from pymongo import MongoClient
-
 
 class Player:
     VERSION = "Default Python folding player"
