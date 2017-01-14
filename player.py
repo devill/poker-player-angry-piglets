@@ -20,7 +20,7 @@ class Player:
             chen_score = self.chen_formula()
             chen_score_treshold = 7
             if self.active_players(game_state) > 2:
-                chen_score_treshold = 9
+                chen_score_treshold = 10
             if chen_score >= chen_score_treshold:
                 return 10000
             else:
@@ -28,6 +28,8 @@ class Player:
                     return game_state["current_buy_in"] - self.player["bet"] + game_state["minimum_raise"]
                 if self.get_position(game_state) == 1 and self.no_raise(game_state):
                     return game_state["current_buy_in"] - self.player["bet"] + game_state["minimum_raise"]
+                if self.min_raise_happened(game_state) and chen_score > 7:
+                    return game_state["current_buy_in"] - self.player["bet"] + (game_state["minimum_raise"] * 2)
                 return 0
         except:
             traceback.print_exc()
