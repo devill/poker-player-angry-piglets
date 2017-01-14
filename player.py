@@ -15,10 +15,11 @@ class Player:
             if chen_score >= chen_score_treshold:
                 return 10000
             else:
-                if self.get_position(game_state) == 2 and self.no_raise(game_state):
-                    return game_state["current_buy_in"] - game_state["players"]["in_action"]["bet"] + game_state["minimum_raise"]
-                if self.get_position(game_state) == 1 and self.no_raise(game_state):
-                    return game_state["current_buy_in"] - game_state["players"]["in_action"]["bet"] + game_state["minimum_raise"]
+                if False:
+                    if self.get_position(game_state) == 2 and self.no_raise(game_state):
+                        return game_state["current_buy_in"] - game_state["players"]["in_action"]["bet"] + game_state["minimum_raise"]
+                    if self.get_position(game_state) == 1 and self.no_raise(game_state):
+                        return game_state["current_buy_in"] - game_state["players"]["in_action"]["bet"] + game_state["minimum_raise"]
                 return 0
         except:
             traceback.print_exc()
