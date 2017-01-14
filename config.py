@@ -11,9 +11,10 @@ config_instance = None
 
 
 class Config(object):
-    version = 'initial config'
+    version = 'default config'
     refresh_interval = 5
-    default_chen_threshold = 7
+    heads_up_threshold = 7
+    default_threshold = 10
 
     def __init__(self):
         self.log = player.log
