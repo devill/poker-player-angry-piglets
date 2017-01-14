@@ -8,28 +8,16 @@ class Player:
         try:
             self.player = self.get_our_player(game_state)
             self.get_our_hand()
-            if False:
-                if self.have_pair():
-                    return 10000
-                if self.is_suited() and ((self.have_rank("A") and self.have_rank("K")) or (self.have_rank("K") and self.have_rank("Q"))):
-                    return 10000
+            chen_score = self.chen_formula()
+            chen_score_treshold = 7
+            if self.active_players(game_state) > 2:
+                chen_score_treshold = 9
+            if chen_score >= chen_score_treshold:
+                return 10000
+            else:
+                if self.is_big_blind(game_state) and self.no_raise(game_state):
+                    return game_state["current_buy_in"] - game_state["players"]["in_action"]["bet"] + game_state["minimum_raise"]
                 return 0
-            if True:
-                chen_score = self.chen_formula()
-                if self.active_players(game_state) > 2:
-                    if chen_score > 12:
-                        return 10000
-                    elif chen_score >= 9:
-                        return 10000
-                    else:
-                        return 0
-                else:
-                    if chen_score > 12:
-                        return 10000
-                    elif chen_score >= 7:
-                        return 10000
-                    else:
-                        return 0
         except:
             traceback.print_exc()
             return 10000
@@ -103,3 +91,9 @@ class Player:
             if player["status"] == "active":
                 count += 1
         return count
+
+    def is_big_blind(self, game_state):
+        return (game_state["dealer"]+2)%(len(game_state["players"])) == game_state["in_action"]
+
+    def no_raise(self, game_state):
+        return game_state["small_blind"] * 2 == game_state["current_buy_in"]
