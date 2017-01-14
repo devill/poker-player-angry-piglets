@@ -18,8 +18,12 @@ class Config(object):
     aggression_index = 7
     safety_index = 4
     check_three_of_a_kind = False
+    three_of_a_kind_with_two_cards_in_hand_bet = 10000
+    three_of_a_kind_with_one_card_in_hand_bet = 10000
     check_two_pairs = False
     two_pair_bet = 10000
+    check_four_of_a_kind = False
+    four_of_a_kind_bet = 10000
 
     def __init__(self):
         self.log = player.log
