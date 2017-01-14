@@ -17,6 +17,7 @@ class Config(object):
     default_threshold = 10
     aggression_index = 7
     safety_index = 4
+    check_three_of_a_kind = False
 
     def __init__(self):
         self.log = player.log

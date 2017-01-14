@@ -1,3 +1,4 @@
+from post_flop_hand_evaluator import PostFlopHandEvaluator
 from config import Config
 import logging
 import sys
@@ -23,7 +24,22 @@ class Player:
             self.get_our_hand()
             chen_score = self.chen_formula()
             chen_score_treshold = int(self.config.heads_up_threshold)
-            # if len(game_state["community_cards"]) > 0:
+
+            if self.config.check_three_of_a_kind:
+                if len(game_state["community_cards"]) > 0:
+                    helper = PostFlopHandEvaluator(game_state["community_cards"], self.player["hole_cards"])
+                    if helper.has_three_of_a_kind_with_two_cards_in_hand():
+                        log.info('three of a kind with two cards in hand')
+                        if game_state["current_buy_in"] < 200:
+                            return 200
+                        else:
+                            return 10000
+                    if helper.has_three_of_a_kind_with_one_card_in_hand():
+                        log.info('three of a kind with one card in hand')
+                        if game_state["current_buy_in"] < 200:
+                            return 200
+                        else:
+                            return 10000
 
             if self.active_players(game_state) > 2:
                 chen_score_treshold = int(self.config.default_threshold)
