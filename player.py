@@ -18,7 +18,7 @@ class Player:
                 chen_score = self.chen_formula()
                 if chen_score > 12:
                     return 10000
-                elif chen_score >= 10:
+                elif chen_score >= 9:
                     return 10000
                 else:
                     return 0
