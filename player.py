@@ -30,6 +30,8 @@ class Player:
                     return game_state["current_buy_in"] - self.player["bet"] + game_state["minimum_raise"]
                 if self.min_raise_happened(game_state) and chen_score > 7:
                     return game_state["current_buy_in"] - self.player["bet"] + (game_state["minimum_raise"] * 2)
+                if game_state["current_buy_in"] < self.player["bet"] * 2:
+                    return game_state["current_buy_in"]
                 return 0
         except:
             traceback.print_exc()
