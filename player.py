@@ -15,7 +15,6 @@ class Player:
 
     def betRequest(self, game_state):
         try:
-            log.info('Juci debug')
             self.player = self.get_our_player(game_state)
             self.get_our_hand()
             chen_score = self.chen_formula()
