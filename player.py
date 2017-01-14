@@ -42,6 +42,7 @@ class Player:
                             return 10000
                 if self.config.check_two_pairs:
                     if helper.has_two_pairs_with_one_card_from_both_in_hand():
+                        log.info('two pairs with one card from both in hand')
                         if game_state["current_buy_in"] < 200:
                             return 200
                         else:
