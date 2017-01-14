@@ -30,9 +30,7 @@ class Player:
         pass
 
     def get_our_player(self, game_state):
-        for player in game_state["players"]:
-            if player["name"] == "Angry Piglets":
-                return player
+        return game_state["players"][game_state["in_action"]]
 
     def get_our_hand(self):
         self.hole_cards = self.player["hole_cards"]
