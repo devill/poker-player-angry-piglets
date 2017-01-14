@@ -120,4 +120,4 @@ class Player:
             return 9
 
     def min_raise_happened(self, game_state):
-        return game_state["current_buy_in"] =< game_state["small_blind"] * 4
+        return game_state["current_buy_in"] <= game_state["small_blind"] * 4
