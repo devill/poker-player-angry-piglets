@@ -16,12 +16,20 @@ class Player:
                 return 0
             if True:
                 chen_score = self.chen_formula()
-                if chen_score > 12:
-                    return 10000
-                elif chen_score >= 9:
-                    return 10000
+                if self.active_players(game_state) > 2:
+                    if chen_score > 12:
+                        return 10000
+                    elif chen_score >= 9:
+                        return 10000
+                    else:
+                        return 0
                 else:
-                    return 0
+                    if chen_score > 12:
+                        return 10000
+                    elif chen_score >= 7:
+                        return 10000
+                    else:
+                        return 0
         except:
             traceback.print_exc()
             return 10000
@@ -88,3 +96,10 @@ class Player:
     def gap_size(self, card1, card2):
         ranks = "23456789TJQKA"
         return max(0, abs(ranks.find(card1) - ranks.find(card2))-1)
+
+    def active_players(self, game_state):
+        count = 0
+        for player in game_state["players"]:
+            if player["status"] == "active":
+                count += 1
+        return count
