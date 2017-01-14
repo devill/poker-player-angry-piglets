@@ -8,11 +8,20 @@ class Player:
         try:
             self.player = self.get_our_player(game_state)
             self.get_our_hand()
-            if self.have_pair():
-                return 10000
-            if self.is_suited() and ((self.have_rank("A") and self.have_rank("K")) or (self.have_rank("K") and self.have_rank("Q"))):
-                return 10000
-            return 0
+            if False:
+                if self.have_pair():
+                    return 10000
+                if self.is_suited() and ((self.have_rank("A") and self.have_rank("K")) or (self.have_rank("K") and self.have_rank("Q"))):
+                    return 10000
+                return 0
+            if True:
+                chen_score = self.chen_formula()
+                if chen_score > 12:
+                    return 10000
+                elif chen_score > 10:
+                    return 10000
+                else:
+                    return 0                    
         except:
             traceback.print_exc()
             return 10000
@@ -27,7 +36,7 @@ class Player:
 
     def get_our_hand(self):
         self.hole_cards = self.player["hole_cards"]
-        self.hole_cards_ranks = "".join([card["rank"] for card in self.hole_cards])
+        self.hole_cards_ranks = "".join([self.convert_to_char(card["rank"]) for card in self.hole_cards])
         self.hole_cards_suits = "".join([card["suit"][0] for card in self.hole_cards])
 
     def have_pair(self):
@@ -38,3 +47,46 @@ class Player:
 
     def have_rank(self, rank):
         return rank in self.hole_cards_ranks
+
+    def convert_to_char(self, rank):
+        if rank == "10":
+            return "T"
+        return rank
+
+    def chen_formula(self):
+        score = self.score_of_highest_card()
+        if have_pair():
+            score *= 2
+        if is_suited():
+            score += 2
+        gap_size = self.gap_size(self.hole_cards_ranks[0], self.hole_cards_ranks[1])
+        gap_size_to_points = {
+            0: 0,
+            1: 1,
+            2: 2,
+            3: 4,
+        }
+        score -= gap_size_to_points.get(gap_size, 5)
+        if gap_size < 2 and not(self.have_rank("A") or self.have_rank("K") or self.have_rank("Q")):
+            score += 1
+        return round(score)
+
+
+
+    def score_of_highest_card(self):
+        if self.have_rank("A"):
+            return 10
+        elif self.have_rank("K"):
+            return 8
+        elif self.have_rank("Q"):
+            return 7
+        elif self.have_rank("J"):
+            return 6
+        elif self.have_rank("T"):
+            return 5
+        else:
+            return int(sorted(self.hole_cards_ranks)[-1])/2.0
+
+    def gap_size(self, card1, card2):
+        ranks = "23456789TJQKA"
+        return abs(ranks.find(card1) - ranks.find(card2))
