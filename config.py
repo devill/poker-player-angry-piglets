@@ -24,6 +24,8 @@ class Config(object):
     two_pair_bet = 10000
     check_four_of_a_kind = False
     four_of_a_kind_bet = 10000
+    check_flush = False
+    flush_bet = 10000
 
     def __init__(self):
         self.log = player.log

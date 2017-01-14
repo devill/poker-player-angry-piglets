@@ -49,10 +49,24 @@ class Player:
                             return int(self.config.two_pair_bet)
                 if self.config.check_four_of_a_kind:
                     if helper.has_four_of_a_kind():
+                        log.info('poker')
                         if game_state["current_buy_in"] < 200:
                             return 200
                         else:
                             return int(self.config.four_of_a_kind_bet)
+                if self.config.check_flush:
+                    if helper.has_flush_with_two_cards_in_hand():
+                        log.info('flush')
+                        if game_state["current_buy_in"] < 200:
+                            return 200
+                        else:
+                            return int(self.config.flush_bet)
+                    if helper.has_flush_with_one_card_in_hand():
+                        log.info('flush')
+                        if game_state["current_buy_in"] < 200:
+                            return 200
+                        else:
+                            return int(self.config.flush_bet)
 
             if self.active_players(game_state) > 2:
                 chen_score_treshold = int(self.config.default_threshold)
