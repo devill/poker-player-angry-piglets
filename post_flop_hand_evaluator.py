@@ -24,5 +24,4 @@ class PostFlopHandEvaluator:
 
         return count
 
-
-
+    # def has_two_pair_with_no_pair_on_board(self):

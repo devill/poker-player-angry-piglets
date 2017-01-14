@@ -19,16 +19,23 @@ class Player:
             self.get_our_hand()
             chen_score = self.chen_formula()
             chen_score_treshold = 7
-            # if game_state["community_cards"]
+            # if len(game_state["community_cards"]) > 0:
+
             if self.active_players(game_state) > 2:
                 chen_score_treshold = 10
             if chen_score >= chen_score_treshold:
                 return 10000
             else:
-                if self.get_position(game_state) == 2 and self.no_raise(game_state):
-                    return game_state["current_buy_in"] - self.player["bet"] + game_state["minimum_raise"]
-                if self.get_position(game_state) == 1 and self.no_raise(game_state):
-                    return game_state["current_buy_in"] - self.player["bet"] + game_state["minimum_raise"]
+                if self.get_position(game_state) == 2 and self.no_raise(game_state) and len(game_state["community_cards"]) == 0:
+                    if self.active_players(game_state) > 3:
+                        return game_state["current_buy_in"] - self.player["bet"] + game_state["minimum_raise"]
+                    else:
+                        return game_state["small_blind"] * 2
+                if self.get_position(game_state) == 1 and self.no_raise(game_state) and len(game_state["community_cards"]) == 0:
+                    if self.active_players(game_state) > 3:
+                        return game_state["current_buy_in"] - self.player["bet"] + game_state["minimum_raise"]
+                    else:
+                        return game_state["small_blind"] * 2
                 if self.min_raise_happened(game_state) and chen_score > 7:
                     return game_state["current_buy_in"] - self.player["bet"] + (game_state["minimum_raise"] * 2)
                 if game_state["current_buy_in"] <= self.player["bet"] * 2 and chen_score > 4:
