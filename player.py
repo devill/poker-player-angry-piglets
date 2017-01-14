@@ -20,7 +20,7 @@ class Player:
             self.player = self.get_our_player(game_state)
             self.get_our_hand()
             chen_score = self.chen_formula()
-            chen_score_treshold = 7
+            chen_score_treshold = int(self.config.default_chen_threshold)
             # if len(game_state["community_cards"]) > 0:
 
             if self.active_players(game_state) > 2:

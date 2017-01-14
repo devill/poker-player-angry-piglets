@@ -13,6 +13,7 @@ config_instance = None
 class Config(object):
     version = 'initial config'
     refresh_interval = 5
+    default_chen_threshold = 7
 
     def __init__(self):
         self.log = player.log
