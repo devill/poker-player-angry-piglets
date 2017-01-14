@@ -17,7 +17,7 @@ class PostFlopHandEvaluator:
         if self.nof_same_rank_community_card_as_hole_card(0) > 1:
             return True
 
-        if self.nof_same_rank_community_card_as_hole_card(2) > 1:
+        if self.nof_same_rank_community_card_as_hole_card(1) > 1:
             return True
 
         return False
