@@ -21,7 +21,7 @@ class Player:
                 elif chen_score > 10:
                     return 10000
                 else:
-                    return 0                    
+                    return 0
         except:
             traceback.print_exc()
             return 10000
@@ -53,9 +53,9 @@ class Player:
 
     def chen_formula(self):
         score = self.score_of_highest_card()
-        if have_pair():
+        if self.have_pair():
             score *= 2
-        if is_suited():
+        if self.is_suited():
             score += 2
         gap_size = self.gap_size(self.hole_cards_ranks[0], self.hole_cards_ranks[1])
         gap_size_to_points = {
