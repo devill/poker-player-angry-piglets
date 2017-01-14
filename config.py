@@ -18,6 +18,8 @@ class Config(object):
     aggression_index = 7
     safety_index = 4
     check_three_of_a_kind = False
+    check_two_pairs = False
+    two_pair_bet = 10000
 
     def __init__(self):
         self.log = player.log

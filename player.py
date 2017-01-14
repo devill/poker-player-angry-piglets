@@ -25,9 +25,9 @@ class Player:
             chen_score = self.chen_formula()
             chen_score_treshold = int(self.config.heads_up_threshold)
 
-            if self.config.check_three_of_a_kind:
-                if len(game_state["community_cards"]) > 0:
-                    helper = PostFlopHandEvaluator(game_state["community_cards"], self.player["hole_cards"])
+            if len(game_state["community_cards"]) > 0:
+                helper = PostFlopHandEvaluator(game_state["community_cards"], self.player["hole_cards"])
+                if self.config.check_three_of_a_kind:
                     if helper.has_three_of_a_kind_with_two_cards_in_hand():
                         log.info('three of a kind with two cards in hand')
                         if game_state["current_buy_in"] < 200:
@@ -40,6 +40,12 @@ class Player:
                             return 200
                         else:
                             return 10000
+                if self.config.check_two_pairs:
+                    if helper.has_two_pairs_with_one_card_from_both_in_hand():
+                        if game_state["current_buy_in"] < 200:
+                            return 200
+                        else:
+                            return int(self.config.two_pair_bet)
 
             if self.active_players(game_state) > 2:
                 chen_score_treshold = int(self.config.default_threshold)
