@@ -1,19 +1,8 @@
-import logging
-import sys
 import traceback
-
-from config import Config
-
-log = logging.getLogger('player.Player')
-log.addHandler(logging.StreamHandler(sys.stderr))
-log.setLevel(logging.DEBUG)
 
 
 class Player:
-    VERSION = "Cautious parrot"
-
-    def __init__(self):
-        self.config = Config()
+    VERSION = "Default Python folding player"
 
     def betRequest(self, game_state):
         try:
