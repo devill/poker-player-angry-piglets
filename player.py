@@ -103,7 +103,7 @@ class Player:
     def active_players(self, game_state):
         count = 0
         for player in game_state["players"]:
-            if player["status"] == "active":
+            if player["status"] != "out":
                 count += 1
         return count
 
@@ -122,3 +122,6 @@ class Player:
             return 2
         else:
             return 9
+
+    def min_raise_happened(self, game_state):
+        return game_state["current_buy_in"] =< game_state["small_blind"] * 4
