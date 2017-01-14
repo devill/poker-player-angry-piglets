@@ -87,4 +87,4 @@ class Player:
 
     def gap_size(self, card1, card2):
         ranks = "23456789TJQKA"
-        return abs(ranks.find(card1) - ranks.find(card2))
+        return max(0, abs(ranks.find(card1) - ranks.find(card2))-1)
